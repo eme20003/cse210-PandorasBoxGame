@@ -1,0 +1,78 @@
+Pandora’s Box Game
+
+Team URL: https://github.com/eme20003/cse210-PandorasBoxGame.git
+
+Additional Resources: 
+    	From the arcade library website: (https://api.arcade.academy/en/latest/examples/index.html#sprites) This should help us know how to do bouncing balls, instruction screens, game over screens, background images, and a ton of other cool stuff!
+    Game Description:
+    Pandora’s box has been opened! It is up to you to fix what you broke in the first place and save the world that you put in jeopardy! Shoot your arrows at plagues, monsters, emotional stresses like raisin cookies that you thought were chocolate chip cookies, homework, and other life-threatening items as they hurtle at your face. Eliminate these from existence and return the world to its state of progress-less blissful ignorance where nothing good nor bad ever happens. 
+
+Mock-ups:
+ 
+Timeline:
+    Week 1: Planning stage
+    •	Create an outline
+    •	Build skeleton of program
+
+    Week 2: Get the game to run
+    •	(1) Items
+
+    Week 3: Make the game more user friendly
+    •	(2) Items
+
+    Week 4: Additional or cooler options for the user
+    •	(3) Items
+
+Rough Game Outline: (note items 1, 2, or 3 from Timeline)
+    Main Scene (pause menu)
+    •	(1) Play button
+    •	(3) Help button
+
+    Game Scene
+    •	(1) User-controlled figure (Pandora)
+    •	(1) Anti germ arrows (shot from Pandora)
+    •	(1) Box that is origin of balls (Pandora’s box)
+    •	(3) after X, balls box start bouncing for final level
+    •	(1) Bouncing of floor angled ball movement - something about Euler's Method
+    •	(1) Collision detection
+    •	(3) Life display - only add if impossible to play
+    •	(2) Score display
+    •	(3) Sound effects
+    •	(2) Pause Button
+
+    Help Scene
+    •	(3) Help text(controls)
+    •	(3) Back button
+
+    Win Scene
+    •	(2) Announcement
+    •	(2) Smiley face animation
+
+    Lose Scene
+    •	(2) Announcement
+    •	(2) Sad face animation
+    •	(2) Restart button
+
+Preview: Game Folder Breakdown (by file)
+    •	__init__
+    •	Actor
+            Pandora
+            Sprites
+            Arrows 
+    •	Constants
+            screen
+    •	Point
+    •	__main__
+    •	Director
+    •	Input service
+            __init__
+            get direction
+    •	Output service
+    •	control actors action
+    •	move actors action
+    •	Handle collisions action
+
+Technologies:
+    •	Arcade Library
+    •	Python
+    •	Encapsulation, Abstraction, Polymorphism, Inheritance
