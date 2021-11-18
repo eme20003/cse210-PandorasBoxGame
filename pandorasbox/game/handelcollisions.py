@@ -1,3 +1,4 @@
+from os import remove
 import sys
 from game import constants
 from game.action import Action
@@ -13,36 +14,29 @@ class HandelCollisions(Action):
         for ball in balls:
             # right wall
             if ball.get_position().equals(constants.MAX_X - 1):
-                #bounce
-                pass
+                ball.set_velocity(ball._velocity.bounce_X())
 
             # left wall
-            if ball.get_position().equals(1):
-                #bounce
-                pass
+            if ball.get_position().get_x() == 1:
+                ball.set_velocity(ball._velocity.bounce_X())
             
             # floor
-            if ball.get_position().equals(constants.MAX_Y - 1):
-                #bounce
-                pass
+            if ball.get_position().get_y() == constants.MAX_Y - 1:
+                 ball.set_velocity(ball._velocity.bounce_Y())
 
             # cealing
-            if ball.get_position().equals(50):
-                #bounce
-                pass
+            if ball.get_position().get_y() == 40:
+                 ball.set_velocity(ball._velocity.bounce_Y())
             
             # pandora
             if ball.get_position().equals(pandora.get_position()):
-                #end game
-                pass
+                sys.exit()
 
-            #arrow
+            #arrow - bal
             if ball.get_position().equals(arrow.get_position()):
-                #kill ball
-                #kill arrow
-                pass
-
-
-    #ball hit pandora
-    #arrow hit ball
-    #ball hit walls and floor
+                ball.remove(ball)
+                arrow.remove(arrow)
+            
+            #arrow - cealing
+            if arrow.get_position().get_y() == 1:
+                arrow.remove(arrow)
