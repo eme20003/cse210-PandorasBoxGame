@@ -36,7 +36,9 @@ class HandelCollisions(Action):
             if ball.get_position().equals(arrow.get_position()):
                 ball.remove(ball)
                 arrow.remove(arrow)
+                #get point
             
             #arrow - cealing
             if arrow.get_position().get_y() == 1:
                 arrow.remove(arrow)
+            #arcade.checkforcolision

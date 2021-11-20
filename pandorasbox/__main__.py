@@ -106,6 +106,13 @@ class PandorasBox(arcade.Window):
         self.arrow_list.update()
 
         # Create a collision list
+        for arrow in self.arrow_list:
+            hit_objects = arcade.check_for_collision_with_list(arrow, self.object_list)
+            for obj in hit_objects:
+                self.score += int(10)
+                obj.remove_from_sprite_lists()
+                arrow.remove_from_sprite_lists()
+
 
         # Loop through each colliding sprite, remove it, and add to the score
 
