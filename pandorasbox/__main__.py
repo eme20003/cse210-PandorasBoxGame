@@ -51,9 +51,13 @@ class Objects(arcade.Sprite):
 class Pandora(arcade.Sprite):
     def __init__(self, filename, scale):
         super().__init__(filename, scale)
+        self.change_x = 0
+        self.change_y = 0
 
     def update(self):
         """"""
+        self.center_x += self.change_x
+        self.center_y += self.change_y
 
 
 # Main Window
@@ -133,6 +137,12 @@ class PandorasBox(arcade.Window):
                 self.score += int(10)
                 obj.remove_from_sprite_lists()
                 arrow.remove_from_sprite_lists()
+
+    def on_key_press(self, key, modifiers):
+        """"""
+
+    def on_key_release(self, key, modifiers):
+        """"""
 
 
 if __name__ == "__main__":
