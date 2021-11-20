@@ -16,7 +16,7 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 SCREEN_TITLE = "Pandoras Box"
 
-# bullet class
+# Arrow Sprite
 class Arrow(arcade.Sprite):
     def __init__(self, filename, scale):
         super().__init__(filename, scale)
@@ -25,7 +25,16 @@ class Arrow(arcade.Sprite):
         """"""
 
 
-# coin class
+# Box Sprite
+class Box(arcade.Sprite):
+    def __init__(self, filename, scale):
+        super().__init__(filename, scale)
+
+    def update(self):
+        """"""
+
+
+# Objects coming from Pandora's Box
 class Objects(arcade.Sprite):
     def __init__(self, filename, scale):
         super().__init__(filename, scale)
@@ -34,7 +43,7 @@ class Objects(arcade.Sprite):
         """"""
 
 
-# pandora class
+# Pandora Sprite
 class Pandora(arcade.Sprite):
     def __init__(self, filename, scale):
         super().__init__(filename, scale)
@@ -52,10 +61,14 @@ class PandorasBox(arcade.Window):
         self.player_list = None
         self.coin_list = None
         self.bullet_list = None
+        self.box_list = None
 
         # Player info
-        self.player_sprite = None
+        self.pandora = None
         self.score = 0
+
+        # Box infor
+        self.box = None
 
         # background color
         arcade.set_background_color(arcade.color.GRAY)
@@ -68,17 +81,23 @@ class PandorasBox(arcade.Window):
         self.player_list = arcade.SpriteList()
         self.object_list = arcade.SpriteList()
         self.arrow_list = arcade.SpriteList()
+        self.box_list = arcade.SpriteList()
 
         # add score
         self.score = 0
 
         # Player info
         self.pandora = Pandora()
-        self.player_sprite.bottom = 0
-        self.player_sprite.left = 0
+        self.pandora.bottom = 0
+        self.pandora.left = 0
+
+        # Box info
+        self.box = Box()
+        self.box.center_x = SCREEN_HEIGHT - 50
+        self.box.center_y = SCREEN_WIDTH / 2
 
         # add pandora to the player list
-        self.player_list.append(self.player_sprite)
+        self.player_list.append(self.pandora)
 
         # background color
         arcade.set_background_color(arcade.color.GRAY)
@@ -89,8 +108,10 @@ class PandorasBox(arcade.Window):
         # prepare screen to draw
         arcade.start_render()
 
-        self.coin_list.draw()
         self.player_list.draw()
+        self.object_list.draw()
+        self.arrow_list.draw()
+        self.box_list.draw()
 
         # draw the score
         output = f"Score: {self.score}"
@@ -117,4 +138,6 @@ if __name__ == "__main__":
 
     # Call to setup method in PandorasBox class
     window.setup()
+
+    # Run arcade
     arcade.run()
