@@ -15,6 +15,10 @@ import arcade
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 SCREEN_TITLE = "Pandoras Box"
+SCALE_BOX = 1
+SCALE_OBJECT = 1
+SCALE_PANDORA = 1
+SCALE_ARROW = 1
 
 # Arrow Sprite
 class Arrow(arcade.Sprite):
@@ -87,14 +91,9 @@ class PandorasBox(arcade.Window):
         self.score = 0
 
         # Player info
-        self.pandora = Pandora()
+        self.pandora = Pandora("pandorasbox\game\pb_images\pandora1.png", SCALE_PANDORA)
         self.pandora.bottom = 0
         self.pandora.left = 0
-
-        # Box info
-        self.box = Box()
-        self.box.center_x = SCREEN_HEIGHT - 50
-        self.box.center_y = SCREEN_WIDTH / 2
 
         # add pandora to the player list
         self.player_list.append(self.pandora)
