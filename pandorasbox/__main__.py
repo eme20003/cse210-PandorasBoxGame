@@ -15,6 +15,10 @@ import arcade
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 SCREEN_TITLE = "Pandoras Box"
+SCALE_BOX = 1
+SCALE_OBJECT = 1
+SCALE_PANDORA = 1
+SCALE_ARROW = 1
 
 # bullet class
 class Arrow(arcade.Sprite):
@@ -73,7 +77,7 @@ class PandorasBox(arcade.Window):
         self.score = 0
 
         # Player info
-        self.pandora = Pandora()
+        self.pandora = Pandora(FILE, SCALE_PANDORA)
         self.player_sprite.bottom = 0
         self.player_sprite.left = 0
 
