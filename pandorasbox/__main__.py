@@ -11,8 +11,29 @@ from game.moveactors import MoveActors
 from game.outputservice import OutputService
 import arcade
 
-def main():
-    pass
-    #cast
-    #script
-    #start game
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+SCREEN_TITLE = 'Pandoras Box'
+
+arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+arcade.set_background_color(arcade.color.GRAY)
+arcade.start_render()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+arcade.finish_render()
+
+if __name__ == "__main__":
+    arcade.run()
+
