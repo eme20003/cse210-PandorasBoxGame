@@ -67,7 +67,7 @@ class PandorasBox(arcade.Window):
         self.pandora = None
         self.score = 0
 
-        # Box infor
+        # Box info
         self.box = None
 
         # background color
@@ -108,6 +108,7 @@ class PandorasBox(arcade.Window):
         # prepare screen to draw
         arcade.start_render()
 
+        # Draw player lists
         self.player_list.draw()
         self.object_list.draw()
         self.arrow_list.draw()
@@ -134,11 +135,6 @@ class PandorasBox(arcade.Window):
                 obj.remove_from_sprite_lists()
                 arrow.remove_from_sprite_lists()
 
-
-        # Loop through each colliding sprite, remove it, and add to the score
-
-
-arcade.finish_render()
 
 if __name__ == "__main__":
     window = PandorasBox(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
