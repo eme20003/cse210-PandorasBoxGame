@@ -15,10 +15,11 @@ import arcade
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 SCREEN_TITLE = "Pandoras Box"
-SCALE_BOX = 1
+SCALE_BOX = .2
 SCALE_OBJECT = 1
-SCALE_PANDORA = .4
-SCALE_ARROW = 1
+SCALE_PANDORA = .3
+SCALE_ARROW = .25
+ARROW_SPEED = 5
 
 # Arrow Sprite
 class Arrow(arcade.Sprite):
@@ -95,12 +96,19 @@ class PandorasBox(arcade.Window):
         self.score = 0
 
         # Player info
-        self.pandora = Pandora("pandorasbox\game\pb_images\pandora1.png", SCALE_PANDORA)
+        self.pandora = Pandora("pandorasbox\game\pb_images\pandora3.jpg", SCALE_PANDORA)
         self.pandora.bottom = 0
         self.pandora.left = 0
 
+        self.box = Box("pandorasbox\game\pb_images\ptreasure_chest.png", SCALE_BOX)
+        self.box.top = 600
+        self.box.left = 0
+
+
         # add pandora to the player list
         self.player_list.append(self.pandora)
+        self.box_list.append(self.box)
+        
 
         # background color
         arcade.set_background_color(arcade.color.GRAY)
@@ -138,11 +146,29 @@ class PandorasBox(arcade.Window):
                 obj.remove_from_sprite_lists()
                 arrow.remove_from_sprite_lists()
 
+            if self.arrow.bottom > SCREEN_HEIGHT:
+                self.arrow.remove_from_sprite_lists()
+
+
     def on_key_press(self, key, modifiers):
-        """"""
+        if key == arcade.key.RIGHT:
+            self.pandora.change_x = 3
+        if key == arcade.key.LEFT:
+            self.pandora.change_x = -3
+        
+        if key == arcade.key.SPACE:
+            self.arrow = Arrow("pandorasbox\game\pb_images\Parrow_up1.png", SCALE_ARROW)
+            self.arrow.center_x = self.pandora.center_x
+            self.arrow.center_y = self.pandora.center_y + 50
+            self.arrow.change_y = ARROW_SPEED
+            self.arrow_list.append(self.arrow)
+            
 
     def on_key_release(self, key, modifiers):
-        """"""
+        if key == arcade.key.RIGHT:
+            self.pandora.change_x = 0
+        if key == arcade.key.LEFT:
+            self.pandora.change_x = 0
 
 
 if __name__ == "__main__":
