@@ -1,25 +1,15 @@
-import random
-from game.director import Director
-from game.actor import Actor
-from game.point import Point
-from game.action import Action
-from game import constants
-from game.controlactors import ControlActors
-from game.handelcollisions import HandelCollisions
-from game.inputservice import InputService
-from game.moveactors import MoveActors
-from game.outputservice import OutputService
 import arcade
+from game.constants import (
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT,
+    SCREEN_TITLE,
+    SCALE_BOX,
+    SCALE_OBJECT,
+    SCALE_PANDORA,
+    SCALE_ARROW,
+    ARROW_SPEED,
+)
 
-# Constants
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-SCREEN_TITLE = "Pandoras Box"
-SCALE_BOX = .2
-SCALE_OBJECT = 1
-SCALE_PANDORA = .3
-SCALE_ARROW = .25
-ARROW_SPEED = 5
 
 # Arrow Sprite
 class Arrow(arcade.Sprite):
@@ -28,6 +18,7 @@ class Arrow(arcade.Sprite):
 
     def update(self):
         """"""
+        self.center_y += ARROW_SPEED
 
 
 # Box Sprite
@@ -102,13 +93,11 @@ class PandorasBox(arcade.Window):
 
         self.box = Box("pandorasbox\game\pb_images\ptreasure_chest.png", SCALE_BOX)
         self.box.top = 600
-        self.box.left = 0
-
+        self.box.center_x = SCREEN_WIDTH / 2
 
         # add pandora to the player list
         self.player_list.append(self.pandora)
         self.box_list.append(self.box)
-        
 
         # background color
         arcade.set_background_color(arcade.color.GRAY)
@@ -149,22 +138,25 @@ class PandorasBox(arcade.Window):
             if self.arrow.bottom > SCREEN_HEIGHT:
                 self.arrow.remove_from_sprite_lists()
 
-
     def on_key_press(self, key, modifiers):
+        """Method for moving Pandora left and right.
+        Also fires arrows."""
+
+        # Move using left or right arrow keys
         if key == arcade.key.RIGHT:
             self.pandora.change_x = 3
         if key == arcade.key.LEFT:
             self.pandora.change_x = -3
-        
+
+        # Fire arrows with spacebar.
         if key == arcade.key.SPACE:
             self.arrow = Arrow("pandorasbox\game\pb_images\Parrow_up1.png", SCALE_ARROW)
             self.arrow.center_x = self.pandora.center_x
             self.arrow.center_y = self.pandora.center_y + 50
-            self.arrow.change_y = ARROW_SPEED
             self.arrow_list.append(self.arrow)
-            
 
     def on_key_release(self, key, modifiers):
+        """Resets the movement to 0."""
         if key == arcade.key.RIGHT:
             self.pandora.change_x = 0
         if key == arcade.key.LEFT:
