@@ -6,6 +6,7 @@ from game.constants import (
     SCREEN_TITLE,
 )
 
+
 if __name__ == "__main__":
     window = Director(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
 
