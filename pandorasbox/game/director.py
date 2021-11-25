@@ -1,3 +1,4 @@
+import sys
 from time import sleep
 from game.constants import (
     SCREEN_WIDTH,
@@ -13,7 +14,7 @@ from game.pandora import Pandora
 from game.box import Box
 from game.arrow import Arrow
 from game.object import Objects
-
+import random
 import arcade
 
 # Main Window
@@ -50,22 +51,23 @@ class Director(arcade.Window):
         self.object_list = arcade.SpriteList()
         self.arrow_list = arcade.SpriteList()
         self.box_list = arcade.SpriteList()
+        self.level = ['one']
 
         # add score
         self.score = 0
 
         # Player info
-        self.pandora = Pandora("pandorasbox\game\pb_images\pandora3.jpg", SCALE_PANDORA)
+        self.pandora = Pandora("pandorasbox\game\pb_images\pandora_shoot_up.png", SCALE_PANDORA)
         self.pandora.bottom = 0
-        self.pandora.left = 0
+        self.pandora.center_x = SCREEN_WIDTH / 2
 
         self.box = Box("pandorasbox\game\pb_images\ptreasure_chest.png", SCALE_BOX)
         self.box.top = 600
         self.box.center_x = SCREEN_WIDTH / 2
 
-        self.object = Objects('pandorasbox\game\pb_images\monster_blue.jpg', SCALE_OBJECT)
+        self.object = Objects('pandorasbox\game\pb_images\monster2_blue.jpg', SCALE_OBJECT)
         self.object.top = 600
-        self.object.center_x = SCREEN_WIDTH / 2
+        self.object.center_x = (SCREEN_WIDTH / 2)
 
         # add pandora to the player list
         self.player_list.append(self.pandora)
@@ -101,8 +103,9 @@ class Director(arcade.Window):
         self.player_list.update()
         self.object_list.update()
         self.arrow_list.update()
-
+        
         # Create a collision list
+        
         for arrow in self.arrow_list:
             hit_objects = arcade.check_for_collision_with_list(arrow, self.object_list)
             for obj in hit_objects:
@@ -112,6 +115,25 @@ class Director(arcade.Window):
 
             if self.arrow.bottom > SCREEN_HEIGHT:
                 self.arrow.remove_from_sprite_lists()
+            
+            if arcade.check_for_collision_with_list(self.pandora, self.object_list):
+                print(F'GAME OVER {self.score} POINTS')
+                sys.exit()
+                
+        if len(self.object_list) == 0:
+                
+                self.level.append('one')
+                for X in self.level:
+                    self.object = Objects('pandorasbox\game\pb_images\monster2_blue.jpg', SCALE_OBJECT)
+                    self.object.top = 600
+                    self.object.center_x = random.randint(100, 700)
+                    self.object_list.append(self.object)
+                
+                
+            
+
+            
+
 
     def on_key_press(self, key, modifiers):
         """Method for moving Pandora left and right.
@@ -119,9 +141,9 @@ class Director(arcade.Window):
         
         # Move using left or right arrow keys
         if key == arcade.key.RIGHT:
-            self.pandora.change_x = 3
+            self.pandora.change_x = 6
         if key == arcade.key.LEFT:
-            self.pandora.change_x = -3
+            self.pandora.change_x = -6
 
         # Fire arrows with spacebar.
         if key == arcade.key.SPACE:

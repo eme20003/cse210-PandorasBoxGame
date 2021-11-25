@@ -25,33 +25,33 @@ Timeline:
 
 Rough Game Outline: (note items 1, 2, or 3 from Timeline)
     Main Scene (pause menu)
-    •	(1) Play button
+    •	(3) Play button
     •	(3) Help button
 
     Game Scene
     •	(1) User-controlled figure (Pandora)
     •	(1) Anti germ arrows (shot from Pandora)
-    •	(1) Box that is origin of balls (Pandora’s box)
+    •	(2) Box that is origin of balls (Pandora’s box)
     •	(3) after X, balls box start bouncing for final level
     •	(1) Bouncing of floor angled ball movement - something about Euler's Method
-    •	(1) Collision detection
+    •	(2) Collision detection
     •	(3) Life display - only add if impossible to play
-    •	(2) Score display
+    •	(1) Score display
     •	(3) Sound effects
-    •	(2) Pause Button
+    •	(3) Pause Button
 
     Help Scene
     •	(3) Help text(controls)
     •	(3) Back button
 
     Win Scene
-    •	(2) Announcement
-    •	(2) Smiley face animation
+    •	(3) Announcement
+    •	(3) Smiley face animation
 
     Lose Scene
-    •	(2) Announcement
-    •	(2) Sad face animation
-    •	(2) Restart button
+    •	(3) Announcement
+    •	(3) Sad face animation
+    •	(3) Restart button
 
 Preview: Game Folder Breakdown (by file)
     •	__init__
