@@ -1,4 +1,5 @@
 import arcade
+
 from game.constants import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
@@ -57,6 +58,9 @@ class PandorasBox(arcade.Window):
     def __init__(self, width, height, title):
         super().__init__(width, height, title)
 
+        #Background image stored here
+        self.background = None
+        
         # Variables that will hold sprite lists
         self.player_list = None
         self.coin_list = None
@@ -77,6 +81,9 @@ class PandorasBox(arcade.Window):
         """Setup the window. Allows you to refresh the screen
         instead of creating another instance."""
 
+        #Background image:
+        self.background = arcade.load_texture("pandorasbox\game\pb_images\scene_blueskysun.png")
+        
         # Sprite Lists
         self.player_list = arcade.SpriteList()
         self.object_list = arcade.SpriteList()
@@ -107,6 +114,9 @@ class PandorasBox(arcade.Window):
 
         # prepare screen to draw
         arcade.start_render()
+
+        # Draw background texture
+        arcade.draw_lrwh_rectangle_textured(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
 
         # Draw player lists
         self.player_list.draw()
