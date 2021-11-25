@@ -4,7 +4,7 @@ from game.constants import (
     SCREEN_HEIGHT,
     #SCREEN_TITLE,
     SCALE_BOX,
-    #SCALE_OBJECT,
+    SCALE_OBJECT,
     SCALE_PANDORA,
     SCALE_ARROW,
     #ARROW_SPEED,
@@ -12,6 +12,7 @@ from game.constants import (
 from game.pandora import Pandora
 from game.box import Box
 from game.arrow import Arrow
+from game.object import Objects
 
 import arcade
 
@@ -33,12 +34,16 @@ class Director(arcade.Window):
         # Box info
         self.box = None
 
+        self.background = None
+
         # background color
         arcade.set_background_color(arcade.color.GRAY)
 
     def setup(self):
         """Setup the window. Allows you to refresh the screen
         instead of creating another instance."""
+
+        self.background = arcade.load_texture('pandorasbox\game\pb_images\scene_greek_town.jpeg')
 
         # Sprite Lists
         self.player_list = arcade.SpriteList()
@@ -50,17 +55,22 @@ class Director(arcade.Window):
         self.score = 0
 
         # Player info
-        self.pandora = Pandora("cse210-PandorasBoxGame\pandorasbox\game\pb_images\pandora3.jpg", SCALE_PANDORA)
+        self.pandora = Pandora("pandorasbox\game\pb_images\pandora3.jpg", SCALE_PANDORA)
         self.pandora.bottom = 0
         self.pandora.left = 0
 
-        self.box = Box("cse210-PandorasBoxGame\pandorasbox\game\pb_images\ptreasure_chest.png", SCALE_BOX)
+        self.box = Box("pandorasbox\game\pb_images\ptreasure_chest.png", SCALE_BOX)
         self.box.top = 600
         self.box.center_x = SCREEN_WIDTH / 2
+
+        self.object = Objects('pandorasbox\game\pb_images\monster_blue.jpg', SCALE_OBJECT)
+        self.object.top = 600
+        self.object.center_x = SCREEN_WIDTH / 2
 
         # add pandora to the player list
         self.player_list.append(self.pandora)
         self.box_list.append(self.box)
+        self.object_list.append(self.object)
 
         # background color
         arcade.set_background_color(arcade.color.GRAY)
@@ -71,6 +81,8 @@ class Director(arcade.Window):
         # prepare screen to draw
         arcade.start_render()
 
+        arcade.draw_lrwh_rectangle_textured(0,0,SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
+
         # Draw player lists
         self.player_list.draw()
         self.object_list.draw()
@@ -79,7 +91,7 @@ class Director(arcade.Window):
 
         # draw the score
         output = f"Score: {self.score}"
-        arcade.draw_text(output, 10, 20, arcade.color.WHITE, 16)
+        arcade.draw_text(output, 10, 20, arcade.color.BLACK, 16)
 
     def update(self, deltatime):
         """Movement and game logic. THIS IS AUTOMATICALLY CALLED.
@@ -113,7 +125,7 @@ class Director(arcade.Window):
 
         # Fire arrows with spacebar.
         if key == arcade.key.SPACE:
-            self.arrow = Arrow("cse210-PandorasBoxGame\pandorasbox\game\pb_images\Parrow_up1.png", SCALE_ARROW)
+            self.arrow = Arrow("pandorasbox\game\pb_images\Parrow_up1.png", SCALE_ARROW)
             self.arrow.center_x = self.pandora.center_x
             self.arrow.center_y = self.pandora.center_y + 50
             self.arrow_list.append(self.arrow)
