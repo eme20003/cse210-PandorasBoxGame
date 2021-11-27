@@ -3,7 +3,7 @@ from time import sleep
 from game.constants import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
-    #SCREEN_TITLE,
+    # SCREEN_TITLE,
     SCALE_BOX,
     SCALE_OBJECT,
     SCALE_PANDORA,
@@ -14,13 +14,18 @@ from game.pandora import Pandora
 from game.box import Box
 from game.arrow import Arrow
 from game.object import Objects
+from game.game_over import GameOverView
+# from game.menu import MenuView
+# from game.instructions import InstructionView
 import random
 import arcade
 
 # Main Window
-class Director(arcade.Window):
-    def __init__(self, width, height, title):
-        super().__init__(width, height, title)
+class Director(arcade.View):
+    def __init__(self):
+        super().__init__()
+
+        self.time_taken = 0
 
         # Variables that will hold sprite lists
         self.player_list = None
@@ -43,7 +48,7 @@ class Director(arcade.Window):
     def setup(self):
         """Setup the window. Allows you to refresh the screen
         instead of creating another instance."""
-
+        
         self.background = arcade.load_texture('pandorasbox\game\pb_images\scene_greek_town.jpeg')
 
         # Sprite Lists
@@ -77,6 +82,11 @@ class Director(arcade.Window):
         # background color
         arcade.set_background_color(arcade.color.GRAY)
 
+    # def on_show(self):
+    #     # Don't show the mouse cursor
+    #     self.window.set_mouse_visible(False)
+    
+    
     def on_draw(self):
         """THIS IS ALWAYS NEEDED. OVERRIDES default method in parent class"""
 
@@ -95,9 +105,11 @@ class Director(arcade.Window):
         output = f"Score: {self.score}"
         arcade.draw_text(output, 10, 20, arcade.color.BLACK, 16)
 
-    def update(self, deltatime):
+    def on_update(self, delta_time):
         """Movement and game logic. THIS IS AUTOMATICALLY CALLED.
         Refresh rate is 60 Hz"""
+
+        self.time_taken += delta_time
 
         # update all the sprites
         self.player_list.update()
@@ -116,9 +128,14 @@ class Director(arcade.Window):
             if self.arrow.bottom > SCREEN_HEIGHT:
                 self.arrow.remove_from_sprite_lists()
             
+            # If collision between Pandora and monsters, move to "Game Over" screen
             if arcade.check_for_collision_with_list(self.pandora, self.object_list):
-                print(F'GAME OVER {self.score} POINTS')
-                sys.exit()
+                game_over_view = GameOverView()
+                game_over_view.time_taken = self.time_taken
+                self.window.set_mouse_visible(True)
+                self.window.show_view(game_over_view)
+                # sys.exit()
+
                 
         if len(self.object_list) == 0:
                 
@@ -128,12 +145,7 @@ class Director(arcade.Window):
                     self.object.top = 600
                     self.object.center_x = random.randint(100, 700)
                     self.object_list.append(self.object)
-                
-                
             
-
-            
-
 
     def on_key_press(self, key, modifiers):
         """Method for moving Pandora left and right.
