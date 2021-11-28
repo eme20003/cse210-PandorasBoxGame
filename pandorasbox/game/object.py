@@ -5,6 +5,15 @@ from game.constants import SCREEN_HEIGHT, SCREEN_WIDTH
 
 # Objects coming from Pandora's Box
 class Objects(arcade.Sprite):
+    """Evil objects released from Pandora's Box. 
+    Inherits from arcade.Sprite
+
+    Stereotype:
+        Information Holder
+
+    Attributes:
+        arcade.Sprite: An instance of arcade.Sprite class
+    """
     def __init__(self, filename, scale):
         super().__init__(filename, scale)
         self.velocity_X = random.randint(-4,4)

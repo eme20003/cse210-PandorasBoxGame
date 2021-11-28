@@ -19,6 +19,15 @@ import arcade
 
 # Main Window
 class Director(arcade.Window):
+    """ A code template for a person who directs the game. The responsibility of 
+    this class of objects is to control the sequence of play.
+    
+    Stereotype:
+        Controller
+
+    Attributes:
+        arcade.Window: Instance of Window Class
+    """
     def __init__(self, width, height, title):
         super().__init__(width, height, title)
 
