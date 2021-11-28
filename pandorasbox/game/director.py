@@ -40,6 +40,10 @@ class Director(arcade.Window):
         # background color
         arcade.set_background_color(arcade.color.GRAY)
 
+        # Sounds
+        self.arrow_sound = arcade.load_sound('pandorasbox\game\pb_sounds\warfare_medieval_scythian_recurve_arrow_heavy_pass_by_002.mp3')
+        self.blowup_sound = arcade.load_sound('pandorasbox\game\pb_sounds\zapsplat_explosion_med_large_71697.mp3')
+
     def setup(self):
         """Setup the window. Allows you to refresh the screen
         instead of creating another instance."""
@@ -111,6 +115,7 @@ class Director(arcade.Window):
             for obj in hit_objects:
                 self.score += int(10)
                 obj.remove_from_sprite_lists()
+                arcade.play_sound(self.blowup_sound)
                 arrow.remove_from_sprite_lists()
 
             if self.arrow.bottom > SCREEN_HEIGHT:
@@ -138,7 +143,6 @@ class Director(arcade.Window):
     def on_key_press(self, key, modifiers):
         """Method for moving Pandora left and right.
         Also fires arrows."""
-        
         # Move using left or right arrow keys
         if key == arcade.key.RIGHT:
             self.pandora.change_x = 6
@@ -151,6 +155,8 @@ class Director(arcade.Window):
             self.arrow.center_x = self.pandora.center_x
             self.arrow.center_y = self.pandora.center_y + 50
             self.arrow_list.append(self.arrow)
+            arcade.play_sound(self.arrow_sound)
+            
 
     def on_key_release(self, key, modifiers):
         """Resets the movement to 0."""
