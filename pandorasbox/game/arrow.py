@@ -1,4 +1,5 @@
-import arcade 
+import arcade
+
 from game.constants import ARROW_SPEED
 # Arrow Sprite
 class Arrow(arcade.Sprite):
