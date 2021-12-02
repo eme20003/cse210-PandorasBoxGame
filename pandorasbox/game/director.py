@@ -143,7 +143,7 @@ class Director(arcade.Window):
         """Method for moving Pandora left and right.
         Also fires arrows."""
         # Move using left or right arrow keys
-        if key == arcade.key.RIGHT:
+        if key == arcade.key.RIGHT:  
             self.pandora.change_x = 6
         if key == arcade.key.LEFT:
             self.pandora.change_x = -6

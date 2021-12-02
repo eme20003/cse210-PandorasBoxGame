@@ -7,12 +7,10 @@ class Pandora(arcade.Sprite):
         self.bottom = 0
         self.center_x = SCREEN_WIDTH / 2
         self.change_x = 0
-        self.change_y = 0
 
     def update(self):
         """"""
         self.center_x += self.change_x
-        self.center_y += self.change_y
 
         # Keep Pandora on the Screen
         if self.left < 0:
