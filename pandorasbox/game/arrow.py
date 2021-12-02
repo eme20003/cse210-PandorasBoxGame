@@ -1,6 +1,6 @@
 import arcade
 
-from game.constants import ARROW_SPEED
+from game.constants import ARROW_SPEED, SCALE_ARROW
 # Arrow Sprite
 class Arrow(arcade.Sprite):
     """Arrows destroy the evils released from Pandora's Box. Inherits from arcade.Sprite
@@ -11,8 +11,8 @@ class Arrow(arcade.Sprite):
     Attributes:
         arcade.Sprite: An instance of arcade.Sprite class
     """
-    def __init__(self, filename, scale):
-        super().__init__(filename, scale)
+    def __init__(self):
+        super().__init__("pandorasbox\game\pb_images\Parrow_up1.png", SCALE_ARROW)
 
     def update(self):
         """"""

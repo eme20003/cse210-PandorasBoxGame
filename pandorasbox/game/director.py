@@ -74,9 +74,7 @@ class Director(arcade.Window):
         self.pandora.bottom = 0
         self.pandora.center_x = SCREEN_WIDTH / 2
 
-        self.box = Box("pandorasbox\game\pb_images\ptreasure_chest.png", SCALE_BOX)
-        self.box.top = 600
-        self.box.center_x = SCREEN_WIDTH / 2
+        self.box = Box()
 
         self.object = Objects()
         self.object.top = 600
@@ -142,12 +140,6 @@ class Director(arcade.Window):
                     self.object.top = 600
                     self.object.center_x = random.randint(100, 700)
                     self.object_list.append(self.object)
-                
-                
-            
-
-            
-
 
     def on_key_press(self, key, modifiers):
         """Method for moving Pandora left and right.
