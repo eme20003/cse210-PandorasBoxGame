@@ -78,7 +78,7 @@ class Director(arcade.Window):
         self.box.top = 600
         self.box.center_x = SCREEN_WIDTH / 2
 
-        self.object = Objects('pandorasbox\game\pb_images\monster2_blue.jpg', SCALE_OBJECT)
+        self.object = Objects()
         self.object.top = 600
         self.object.center_x = (SCREEN_WIDTH / 2)
 
@@ -138,7 +138,7 @@ class Director(arcade.Window):
                 
                 self.level.append('one')
                 for X in self.level:
-                    self.object = Objects('pandorasbox\game\pb_images\monster2_blue.jpg', SCALE_OBJECT)
+                    self.object = Objects()
                     self.object.top = 600
                     self.object.center_x = random.randint(100, 700)
                     self.object_list.append(self.object)
