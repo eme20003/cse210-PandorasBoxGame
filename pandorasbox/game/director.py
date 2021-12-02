@@ -150,7 +150,7 @@ class Director(arcade.Window):
 
         # Fire arrows with spacebar.
         if key == arcade.key.SPACE:
-            self.arrow = Arrow("pandorasbox\game\pb_images\Parrow_up1.png", SCALE_ARROW)
+            self.arrow = Arrow()
             self.arrow.center_x = self.pandora.center_x
             self.arrow.center_y = self.pandora.center_y + 50
             self.arrow_list.append(self.arrow)
