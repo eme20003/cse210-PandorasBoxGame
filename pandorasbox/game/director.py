@@ -70,9 +70,7 @@ class Director(arcade.Window):
         self.score = 0
 
         # Player info
-        self.pandora = Pandora("pandorasbox\game\pb_images\pandora_shoot_up.png", SCALE_PANDORA)
-        self.pandora.bottom = 0
-        self.pandora.center_x = SCREEN_WIDTH / 2
+        self.pandora = Pandora()
 
         self.box = Box()
 
