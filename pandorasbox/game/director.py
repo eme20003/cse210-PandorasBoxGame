@@ -14,6 +14,7 @@ from game.pandora import Pandora
 from game.box import Box
 from game.arrow import Arrow
 from game.object import Objects
+from game.handelcollisions import HandelCollisions
 import random
 import arcade
 
@@ -115,20 +116,26 @@ class Director(arcade.Window):
         
         # Create a collision list
         
-        for arrow in self.arrow_list:
-            hit_objects = arcade.check_for_collision_with_list(arrow, self.object_list)
-            for obj in hit_objects:
-                self.score += int(10)
-                obj.remove_from_sprite_lists()
-                arcade.play_sound(self.blowup_sound)
-                arrow.remove_from_sprite_lists()
+        HandelCollisions.arrow_hit_object(self, self.arrow_list, self.object_list)
+        HandelCollisions.arrow_off_screen(self, self.arrow_list)
+        HandelCollisions.pandora_hit_object(self, self.pandora)
+        
+        
+        
+        #for arrow in self.arrow_list:
+         #   hit_objects = arcade.check_for_collision_with_list(arrow, self.object_list)
+           # for obj in hit_objects:
+            #    self.score += int(10)
+             #   obj.remove_from_sprite_lists()
+              #  arcade.play_sound(self.blowup_sound)
+               # arrow.remove_from_sprite_lists()
 
-            if self.arrow.bottom > SCREEN_HEIGHT:
-                self.arrow.remove_from_sprite_lists()
+            #if self.arrow.bottom > SCREEN_HEIGHT:
+             #   self.arrow.remove_from_sprite_lists()
             
-            if arcade.check_for_collision_with_list(self.pandora, self.object_list):
-                print(F'GAME OVER {self.score} POINTS')
-                sys.exit()
+           # if arcade.check_for_collision_with_list(self.pandora, self.object_list):
+            #    print(F'GAME OVER {self.score} POINTS')
+             #   sys.exit()
                 
         if len(self.object_list) == 0:
                 
