@@ -1,5 +1,4 @@
 import sys
-from time import sleep
 from game.constants import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
@@ -15,11 +14,11 @@ from game.box import Box
 from game.arrow import Arrow
 from game.object import Objects
 from game.game_over import GameOverView
-# from game.menu import MenuView
-# from game.instructions import InstructionView
 from game.handelcollisions import HandelCollisions
+from game.score import Score
 import random
 import arcade
+
 
 # Main Window
 class Director(arcade.View):
@@ -42,9 +41,11 @@ class Director(arcade.View):
         self.bullet_list = None
         self.box_list = None
 
+        self.score = Score()
+        self.collisions = HandelCollisions(self.score)
+
         # Player info
         self.pandora = None
-        self.score = 0
 
         # Box info
         self.box = None
@@ -55,7 +56,7 @@ class Director(arcade.View):
         arcade.set_background_color(arcade.color.GRAY)
 
         # Sounds
-        self.arrow_sound = arcade.load_sound('pandorasbox\game\pb_sounds\warfare_medieval_scythian_recurve_arrow_heavy_pass_by_002.mp3')
+        self.arrow_sound = arcade.load_sound('pandorasbox\game\pb_sounds\zapsplat_explosion_med_large_71697.mp3')
         self.blowup_sound = arcade.load_sound('pandorasbox\game\pb_sounds\zapsplat_explosion_med_large_71697.mp3')
 
     def setup(self):
@@ -70,9 +71,6 @@ class Director(arcade.View):
         self.arrow_list = arcade.SpriteList()
         self.box_list = arcade.SpriteList()
         self.level = ['one']
-
-        # add score
-        self.score = 0
 
         # Player info
         self.pandora = Pandora()
@@ -107,7 +105,7 @@ class Director(arcade.View):
         self.box_list.draw()
 
         # draw the score
-        output = f"Score: {self.score}"
+        output = f"Score: {self.score.get_score()}"
         arcade.draw_text(output, 10, 20, arcade.color.BLACK, 16)
 
     def on_update(self, delta_time):
@@ -121,19 +119,18 @@ class Director(arcade.View):
         self.object_list.update()
         self.arrow_list.update()
         
-        # Create a collision list
+        # Create a collision list        
+        self.collisions.arrow_hit_object(self.arrow_list, self.object_list, self.blowup_sound)
+        self.collisions.arrow_off_screen(self.arrow_list)
         
-        HandelCollisions.arrow_hit_object(self, self.arrow_list, self.object_list)
-        HandelCollisions.arrow_off_screen(self, self.arrow_list)
-        HandelCollisions.pandora_hit_object(self, self.pandora)
-        
-            
-        # If collision between Pandora and monsters, move to "Game Over" screen
-        if arcade.check_for_collision_with_list(self.pandora, self.object_list):
+        if self.collisions.pandora_hit_object(self.pandora, self.object_list):
+                        
+            # display game over view
             game_over_view = GameOverView()
+            game_over_view.score = self.score.get_score()
             game_over_view.time_taken = self.time_taken
-            self.window.set_mouse_visible(True)
             self.window.show_view(game_over_view)
+            # sys.exit()
                 
         if len(self.object_list) == 0:
                 
@@ -149,16 +146,11 @@ class Director(arcade.View):
         """Method for moving Pandora left and right.
         Also fires arrows."""
         # Move using left or right arrow keys
-        if key == arcade.key.RIGHT:  
-            self.pandora.change_x = 6
-        if key == arcade.key.LEFT:
-            self.pandora.change_x = -6
+        self.pandora.move_pandora(key)
 
         # Fire arrows with spacebar.
         if key == arcade.key.SPACE:
-            self.arrow = Arrow()
-            self.arrow.center_x = self.pandora.center_x
-            self.arrow.center_y = self.pandora.center_y + 50
+            self.arrow = Arrow(self.pandora)
             self.arrow_list.append(self.arrow)
             arcade.play_sound(self.arrow_sound)
             

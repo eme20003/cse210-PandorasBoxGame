@@ -19,3 +19,8 @@ class Pandora(arcade.Sprite):
         elif self.right > SCREEN_WIDTH:
             self.right = SCREEN_WIDTH
 
+    def move_pandora(self, key):
+        if key == arcade.key.RIGHT:  
+            self.change_x = 6
+        if key == arcade.key.LEFT:
+            self.change_x = -6
