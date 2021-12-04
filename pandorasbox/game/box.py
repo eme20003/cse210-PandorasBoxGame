@@ -12,7 +12,7 @@ class Box(arcade.Sprite):
         arcade.Sprite: An instance of arcade.Sprite class
     """
     def __init__(self):
-        super().__init__("pandorasbox\game\pb_images\ptreasure_chest.png", SCALE_BOX)
+        super().__init__("cse210-PandorasBoxGame\pandorasbox\game\pb_images\ptreasure_chest.png", SCALE_BOX)
         self.top = 600
         self.center_x = SCREEN_WIDTH / 2
 
