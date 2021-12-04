@@ -1,5 +1,4 @@
 import arcade
-# from game.director import Director
 from game.constants import SCREEN_WIDTH
 
 class GameOverView(arcade.View):

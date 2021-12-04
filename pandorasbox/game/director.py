@@ -128,13 +128,13 @@ class Director(arcade.View):
             if self.arrow.bottom > SCREEN_HEIGHT:
                 self.arrow.remove_from_sprite_lists()
             
-            # If collision between Pandora and monsters, move to "Game Over" screen
-            if arcade.check_for_collision_with_list(self.pandora, self.object_list):
-                game_over_view = GameOverView()
-                game_over_view.time_taken = self.time_taken
-                self.window.set_mouse_visible(True)
-                self.window.show_view(game_over_view)
-                # sys.exit()
+        # If collision between Pandora and monsters, move to "Game Over" screen
+        if arcade.check_for_collision_with_list(self.pandora, self.object_list):
+            game_over_view = GameOverView()
+            game_over_view.time_taken = self.time_taken
+            self.window.set_mouse_visible(True)
+            self.window.show_view(game_over_view)
+            # sys.exit()
 
                 
         if len(self.object_list) == 0:

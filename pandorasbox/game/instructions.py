@@ -14,7 +14,7 @@ class InstructionView(arcade.View):
     def on_mouse_press(self, _x, _y, _button, _modifiers):
         # Call to setup method in PandorasBox class
         director_view = Director()
-        director_view.setup(self)
+        director_view.setup()
         self.window.show_view(director_view)
     
       
