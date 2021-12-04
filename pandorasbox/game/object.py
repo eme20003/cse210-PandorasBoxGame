@@ -1,12 +1,22 @@
 import arcade
 import random
-
+from game.constants import(SCALE_OBJECT)
 from game.constants import SCREEN_HEIGHT, SCREEN_WIDTH
 
 # Objects coming from Pandora's Box
 class Objects(arcade.Sprite):
-    def __init__(self, filename, scale):
-        super().__init__(filename, scale)
+    """Evil objects released from Pandora's Box. 
+    Inherits from arcade.Sprite
+
+    Stereotype:
+        Information Holder
+
+    Attributes:
+        arcade.Sprite: An instance of arcade.Sprite class
+    """
+    def __init__(self):
+        super().__init__('pandorasbox\game\pb_images\monster2_blue.png', SCALE_OBJECT)
+        
         self.velocity_X = random.randint(-4,4)
         self.velocity_Y = random.randint(-4, -2)
         self.change_x = 0

@@ -17,14 +17,23 @@ from game.object import Objects
 from game.game_over import GameOverView
 # from game.menu import MenuView
 # from game.instructions import InstructionView
+from game.handelcollisions import HandelCollisions
 import random
 import arcade
 
 # Main Window
 class Director(arcade.View):
+    """ A code template for a person who directs the game. The responsibility of 
+    this class of objects is to control the sequence of play.
+    
+    Stereotype:
+        Controller
+
+    Attributes:
+        arcade.Window: Instance of Window Class
+    """
     def __init__(self):
         super().__init__()
-
         self.time_taken = 0
 
         # Variables that will hold sprite lists
@@ -45,6 +54,10 @@ class Director(arcade.View):
         # background color
         arcade.set_background_color(arcade.color.GRAY)
 
+        # Sounds
+        self.arrow_sound = arcade.load_sound('pandorasbox\game\pb_sounds\warfare_medieval_scythian_recurve_arrow_heavy_pass_by_002.mp3')
+        self.blowup_sound = arcade.load_sound('pandorasbox\game\pb_sounds\zapsplat_explosion_med_large_71697.mp3')
+
     def setup(self):
         """Setup the window. Allows you to refresh the screen
         instead of creating another instance."""
@@ -62,15 +75,11 @@ class Director(arcade.View):
         self.score = 0
 
         # Player info
-        self.pandora = Pandora("pandorasbox\game\pb_images\pandora_shoot_up.png", SCALE_PANDORA)
-        self.pandora.bottom = 0
-        self.pandora.center_x = SCREEN_WIDTH / 2
+        self.pandora = Pandora()
 
-        self.box = Box("pandorasbox\game\pb_images\ptreasure_chest.png", SCALE_BOX)
-        self.box.top = 600
-        self.box.center_x = SCREEN_WIDTH / 2
+        self.box = Box()
 
-        self.object = Objects('pandorasbox\game\pb_images\monster2_blue.jpg', SCALE_OBJECT)
+        self.object = Objects()
         self.object.top = 600
         self.object.center_x = (SCREEN_WIDTH / 2)
 
@@ -81,10 +90,6 @@ class Director(arcade.View):
 
         # background color
         arcade.set_background_color(arcade.color.GRAY)
-
-    # def on_show(self):
-    #     # Don't show the mouse cursor
-    #     self.window.set_mouse_visible(False)
     
     
     def on_draw(self):
@@ -118,15 +123,10 @@ class Director(arcade.View):
         
         # Create a collision list
         
-        for arrow in self.arrow_list:
-            hit_objects = arcade.check_for_collision_with_list(arrow, self.object_list)
-            for obj in hit_objects:
-                self.score += int(10)
-                obj.remove_from_sprite_lists()
-                arrow.remove_from_sprite_lists()
-
-            if self.arrow.bottom > SCREEN_HEIGHT:
-                self.arrow.remove_from_sprite_lists()
+        HandelCollisions.arrow_hit_object(self, self.arrow_list, self.object_list)
+        HandelCollisions.arrow_off_screen(self, self.arrow_list)
+        HandelCollisions.pandora_hit_object(self, self.pandora)
+        
             
         # If collision between Pandora and monsters, move to "Game Over" screen
         if arcade.check_for_collision_with_list(self.pandora, self.object_list):
@@ -134,14 +134,12 @@ class Director(arcade.View):
             game_over_view.time_taken = self.time_taken
             self.window.set_mouse_visible(True)
             self.window.show_view(game_over_view)
-            # sys.exit()
-
                 
         if len(self.object_list) == 0:
                 
                 self.level.append('one')
                 for X in self.level:
-                    self.object = Objects('pandorasbox\game\pb_images\monster2_blue.jpg', SCALE_OBJECT)
+                    self.object = Objects()
                     self.object.top = 600
                     self.object.center_x = random.randint(100, 700)
                     self.object_list.append(self.object)
@@ -150,19 +148,20 @@ class Director(arcade.View):
     def on_key_press(self, key, modifiers):
         """Method for moving Pandora left and right.
         Also fires arrows."""
-        
         # Move using left or right arrow keys
-        if key == arcade.key.RIGHT:
+        if key == arcade.key.RIGHT:  
             self.pandora.change_x = 6
         if key == arcade.key.LEFT:
             self.pandora.change_x = -6
 
         # Fire arrows with spacebar.
         if key == arcade.key.SPACE:
-            self.arrow = Arrow("pandorasbox\game\pb_images\Parrow_up1.png", SCALE_ARROW)
+            self.arrow = Arrow()
             self.arrow.center_x = self.pandora.center_x
             self.arrow.center_y = self.pandora.center_y + 50
             self.arrow_list.append(self.arrow)
+            arcade.play_sound(self.arrow_sound)
+            
 
     def on_key_release(self, key, modifiers):
         """Resets the movement to 0."""
