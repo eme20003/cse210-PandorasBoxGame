@@ -1,6 +1,6 @@
 class Score:
     def __init__(self) -> None:
-        '''The Class contstructor
+        '''The Class constructor
         
         Stereotype:
             Information Holder'''
