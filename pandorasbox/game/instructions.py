@@ -4,14 +4,27 @@ from game.director import Director
 
 class InstructionView(arcade.View):
     def __init__(self):
+        '''The Class contstructor
+        
+        Stereotype:
+            Information Holder
+        Attribute:
+            arcade.View: An instance of the arcade.View class'''
         super().__init__()
         self.background = None
 
     
     def on_show(self):
+        '''Display the backround as one of the images stored in pb_images
+        
+        Args:
+            self(InstructionView): an instance of InstructionView'''
         self.background = arcade.load_texture('cse210-PandorasBoxGame\pandorasbox\game\pb_images\scene_scroll_paper.png')
 
     def on_draw(self):
+        '''Explaines to the user the story of the game and what needs to take place
+        Args:
+            self(InstructionView): an instance of InstructionView'''
         arcade.start_render()
 
         arcade.draw_lrwh_rectangle_textured(0,0,SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
@@ -27,6 +40,10 @@ class InstructionView(arcade.View):
         arcade.draw_text("Click to begin saving the world from your dastardly deeds.", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 100, arcade.color.GRAY, font_size = 20, anchor_x = "center")
 
     def on_mouse_press(self, _x, _y, _button, _modifiers):
+        '''Starts the game once the mouse button is pressed
+        
+        Args:
+            self(InstructionView): an instance of InstructionView'''
         # Call to setup method in PandorasBox class
         director_view = Director()
         director_view.setup()

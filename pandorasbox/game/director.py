@@ -56,7 +56,7 @@ class Director(arcade.View):
         #arcade.set_background_color(arcade.color.GRAY)
 
         # Sounds
-        self.arrow_sound = arcade.load_sound('cse210-PandorasBoxGame\pandorasbox\game\pb_sounds\zapsplat_explosion_med_large_71697.mp3')
+        self.arrow_sound = arcade.load_sound('pandorasbox\game\pb_sounds\warfare_medieval_scythian_recurve_arrow_heavy_pass_by_002.mp3')
         self.blowup_sound = arcade.load_sound('cse210-PandorasBoxGame\pandorasbox\game\pb_sounds\zapsplat_explosion_med_large_71697.mp3')
 
     def setup(self):

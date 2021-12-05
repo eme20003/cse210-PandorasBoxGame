@@ -24,7 +24,10 @@ class Objects(arcade.Sprite):
         
 
     def update(self):
-        """"""
+        """Updates the objects or enemies moving in different directions and within the space or dimensions of the screen
+        
+        Args:
+            self(objects): an instance of Objects"""
         
         self.center_y += self.velocity_Y
         self.center_x += self.velocity_X
