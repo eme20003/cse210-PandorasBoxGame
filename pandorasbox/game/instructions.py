@@ -19,10 +19,10 @@ class InstructionView(arcade.View):
         
         Args:
             self(InstructionView): an instance of InstructionView'''
-        self.background = arcade.load_texture('cse210-PandorasBoxGame\pandorasbox\game\pb_images\scene_scroll_paper.png')
+        self.background = arcade.load_texture('pandorasbox\game\pb_images\scene_scroll_paper.png')
 
     def on_draw(self):
-        '''Explaines to the user the story of the game and what needs to take place
+        '''Explains to the user the story of the game and what needs to take place
         Args:
             self(InstructionView): an instance of InstructionView'''
         arcade.start_render()
