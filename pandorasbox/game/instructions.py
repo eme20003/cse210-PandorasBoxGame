@@ -30,7 +30,7 @@ class InstructionView(arcade.View):
         arcade.draw_lrwh_rectangle_textured(0,0,SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
         
 
-        arcade.draw_text("Instructions", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 200, arcade.color.BLACK, font_size = 40, anchor_x = "center")
+        arcade.draw_text("Instructions", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 190, arcade.color.BLACK, font_size = 40, anchor_x = "center")
         arcade.draw_text("Pandora’s box has been opened! It is up to you to fix what you broke in the first place ", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 150, arcade.color.BLACK, font_size = 14, anchor_x = "center") 
         arcade.draw_text("and save the world that you put in jeopardy! Shoot your arrows at plagues, monsters, hunger, ", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 130, arcade.color.BLACK, font_size = 13, anchor_x = "center")
         arcade.draw_text("emotional stresses like when Pluto was a planet, then a mass of rocks, then a planet, then a star,", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 110, arcade.color.BLACK, font_size = 13, anchor_x = "center") 
