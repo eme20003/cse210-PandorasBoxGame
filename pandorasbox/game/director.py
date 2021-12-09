@@ -16,6 +16,7 @@ from game.object import Objects
 from game.game_over import GameOverView
 from game.handelcollisions import HandelCollisions
 from game.score import Score
+from game.health import Health
 import random
 import arcade
 
@@ -59,6 +60,9 @@ class Director(arcade.View):
         self.arrow_sound = arcade.load_sound('pandorasbox\game\pb_sounds\warfare_medieval_scythian_recurve_arrow_heavy_pass_by_002.mp3')
         self.blowup_sound = arcade.load_sound('pandorasbox\game\pb_sounds\zapsplat_explosion_med_large_71697.mp3')
 
+        # Health bar
+        self.health = None
+
     def setup(self):
         """Setup the window. Allows you to refresh the screen
         instead of creating another instance."""
@@ -88,6 +92,9 @@ class Director(arcade.View):
 
         # background color
         arcade.set_background_color(arcade.color.GRAY)
+
+        # Health Bar
+        self.health = Health()
     
     
     def on_draw(self):
@@ -108,6 +115,9 @@ class Director(arcade.View):
         output = f"Score: {self.score.get_score()}"
         arcade.draw_text(output, 10, 20, arcade.color.BLACK, 16)
 
+        # draw the healthbar
+        self.health.draw_bar()
+
     def on_update(self, delta_time):
         """Movement and game logic. THIS IS AUTOMATICALLY CALLED.
         Refresh rate is 60 Hz"""
@@ -123,14 +133,16 @@ class Director(arcade.View):
         self.collisions.arrow_hit_object(self.arrow_list, self.object_list, self.blowup_sound)
         self.collisions.arrow_off_screen(self.arrow_list)
         
-        if self.collisions.pandora_hit_object(self.pandora, self.object_list):
-                        
-            # display game over view
-            game_over_view = GameOverView()
-            game_over_view.score = self.score.get_score()
-            game_over_view.time_taken = self.time_taken
-            self.window.show_view(game_over_view)
-            # sys.exit()
+        if self.collisions.pandora_hit_object(self.player_list, self.object_list):
+            if self.health.has_health():
+                self.health.subtract()
+            else:                            
+                # display game over view
+                game_over_view = GameOverView()
+                game_over_view.score = self.score.get_score()
+                game_over_view.time_taken = self.time_taken
+                self.window.show_view(game_over_view)
+                # sys.exit()
                 
         if len(self.object_list) == 0:
                 
@@ -141,6 +153,8 @@ class Director(arcade.View):
                     self.object.center_x = random.randint(100, 700)
                     self.object_list.append(self.object)
             
+        # update health bar
+        self.health.draw_bar()
 
     def on_key_press(self, key, modifiers):
         """Method for moving Pandora left and right.
