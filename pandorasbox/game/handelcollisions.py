@@ -50,9 +50,10 @@ class HandelCollisions(Action):
         Args:
         
         object_list(list): the enemies on the screen'''
-        for object in object_list:
-            if arcade.check_for_collision_with_list(object, player_list):
-                object.remove_from_sprite_lists()            
+        for player in player_list:
+            hit_objects = arcade.check_for_collision_with_list(player, object_list)
+            for obj in hit_objects:
+                obj.remove_from_sprite_lists()            
                 return True
             else:
                 return False
