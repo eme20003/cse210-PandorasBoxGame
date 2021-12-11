@@ -1,7 +1,6 @@
 import arcade
 from game.constants import (SCREEN_WIDTH, SCREEN_HEIGHT)
 from game.instructions import InstructionView
-from game.box import Box
 
 class MenuView(arcade.View):
     def __init__(self):

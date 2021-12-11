@@ -3,7 +3,6 @@ from game.director import Director
 from game.constants import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
-    SCREEN_TITLE,
 )
 from game.menu import MenuView
 

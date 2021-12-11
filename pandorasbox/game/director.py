@@ -47,9 +47,6 @@ class Director(arcade.View):
 
         self.background = None
 
-        # background color
-        #arcade.set_background_color(arcade.color.GRAY)
-
         # Sounds
         self.arrow_sound = arcade.load_sound('pandorasbox\game\pb_sounds\warfare_medieval_scythian_recurve_arrow_heavy_pass_by_002.mp3')
         self.blowup_sound = arcade.load_sound('pandorasbox\game\pb_sounds\zapsplat_explosion_med_large_71697.mp3')
@@ -137,7 +134,6 @@ class Director(arcade.View):
                 game_over_view.score = self.score.get_score()
                 game_over_view.time_taken = self.time_taken
                 self.window.show_view(game_over_view)
-                # sys.exit()
                 
         if len(self.object_list) == 0:
                 
