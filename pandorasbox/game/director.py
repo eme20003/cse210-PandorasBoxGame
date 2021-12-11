@@ -2,12 +2,6 @@ import sys
 from game.constants import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
-    # SCREEN_TITLE,
-    SCALE_BOX,
-    SCALE_OBJECT,
-    SCALE_PANDORA,
-    SCALE_ARROW,
-    #ARROW_SPEED,
 )
 from game.pandora import Pandora
 from game.box import Box
@@ -133,6 +127,7 @@ class Director(arcade.View):
         self.collisions.arrow_hit_object(self.arrow_list, self.object_list, self.blowup_sound)
         self.collisions.arrow_off_screen(self.arrow_list)
         
+
         if self.collisions.pandora_hit_object(self.player_list, self.object_list):
             if self.health.has_health():
                 self.health.subtract()
