@@ -2,12 +2,6 @@ import sys
 from game.constants import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
-    # SCREEN_TITLE,
-    SCALE_BOX,
-    SCALE_OBJECT,
-    SCALE_PANDORA,
-    SCALE_ARROW,
-    #ARROW_SPEED,
 )
 from game.pandora import Pandora
 from game.box import Box
@@ -130,7 +124,6 @@ class Director(arcade.View):
             game_over_view.score = self.score.get_score()
             game_over_view.time_taken = self.time_taken
             self.window.show_view(game_over_view)
-            # sys.exit()
                 
         if len(self.object_list) == 0:
                 

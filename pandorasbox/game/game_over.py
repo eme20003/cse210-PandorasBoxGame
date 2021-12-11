@@ -36,4 +36,4 @@ class GameOverView(arcade.View):
             anchor_x = "center")
 
         output_total = f"Total Score: {self.score}"
-        arcade.draw_text(output_total, 10, 10, arcade.color.WHITE, 14)
+        arcade.draw_text(output_total, 10, 10, arcade.color.WHITE, 14)           
