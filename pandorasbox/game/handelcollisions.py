@@ -2,7 +2,7 @@ import arcade
 from game.action import Action
 from game.constants import SCREEN_HEIGHT
 from game.score import Score
-from arcade import SpriteList, Sprite
+from arcade import SpriteList
 
 class HandelCollisions(Action):
 
