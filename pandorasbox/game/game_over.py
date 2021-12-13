@@ -15,7 +15,7 @@ class GameOverView(arcade.View):
         Args:
             self(InstructionView): an instance of InstructionView'''
         arcade.set_background_color(arcade.color.BLACK)
-        self.background = arcade.load_texture("pandorasbox\game\pb_images\phoenix_fire.png")
+        self.background = arcade.load_texture("pandorasbox/game/pb_images/phoenix_fire.png")
 
     def on_draw(self):
         """Draw "Game over" across the screen."""

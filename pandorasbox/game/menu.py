@@ -17,7 +17,7 @@ class MenuView(arcade.View):
         '''display the menu window'''
         # background color
         arcade.set_background_color(arcade.color.WHITE)
-        self.background = arcade.load_texture("pandorasbox\game\pb_images\ptreasure_chest.png")
+        self.background = arcade.load_texture("pandorasbox/game/pb_images/ptreasure_chest.png")
 
 
     def on_draw(self):

@@ -9,7 +9,7 @@ class Pandora(arcade.Sprite):
             Information Holder
         Attribute:
             arcade.Sprite: An instance of the arcade.Sprite class'''
-        super().__init__("pandorasbox\game\pb_images\pandora_shoot_up.png", SCALE_PANDORA)
+        super().__init__("pandorasbox/game/pb_images/pandora_shoot_up.png", SCALE_PANDORA)
         self.bottom = 0
         self.center_x = SCREEN_WIDTH / 2
         self.change_x = 0
