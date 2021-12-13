@@ -13,7 +13,7 @@ class Arrow(arcade.Sprite):
         arcade.Sprite: An instance of arcade.Sprite class
     """
     def __init__(self, pandora: Pandora):
-        super().__init__("pandorasbox\game\pb_images\Parrow_up1.png", SCALE_ARROW)
+        super().__init__("pandorasbox/game/pb_images/Parrow_up1.png", SCALE_ARROW)
         
         self.center_x = pandora.center_x
         self.center_y = pandora.center_y + 50

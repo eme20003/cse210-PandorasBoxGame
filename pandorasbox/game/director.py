@@ -48,8 +48,8 @@ class Director(arcade.View):
         self.background = None
 
         # Sounds
-        self.arrow_sound = arcade.load_sound('pandorasbox\game\pb_sounds\warfare_medieval_scythian_recurve_arrow_heavy_pass_by_002.mp3')
-        self.blowup_sound = arcade.load_sound('pandorasbox\game\pb_sounds\zapsplat_explosion_med_large_71697.mp3')
+        self.arrow_sound = arcade.load_sound('pandorasbox/game/pb_sounds/warfare_medieval_scythian_recurve_arrow_heavy_pass_by_002.mp3')
+        self.blowup_sound = arcade.load_sound('pandorasbox/game/pb_sounds/zapsplat_explosion_med_large_71697.mp3')
 
         # Health bar
         self.health = None
@@ -58,7 +58,7 @@ class Director(arcade.View):
         """Setup the window. Allows you to refresh the screen
         instead of creating another instance."""
         
-        self.background = arcade.load_texture('pandorasbox\game\pb_images\scene_greek_town.png')
+        self.background = arcade.load_texture('pandorasbox/game/pb_images/scene_greek_town.png')
 
         # Sprite Lists
         self.player_list = arcade.SpriteList()
